@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { FetchService } from '../fetch.service';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -7,6 +7,24 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  constructor(public fetch:FetchService) {
+    this.get();
+  }
+algo:any;
+  get(){
+    this.fetch.getStudents().then((res: any) => {
+      // Maneja la respuesta aquí
+      console.log(res);
+      this.algo=res;
+    })
+    .catch(error => {
+      // Maneja cualquier error que pueda ocurrir durante la solicitud
+      console.error(error);
+    });
+  }
+  
+
+
+  
 
 }
